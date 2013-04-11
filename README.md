@@ -17,4 +17,16 @@ Put a file in the `/pages` directory with a name like `file-name.md` extention. 
 
 ## Deploying the site
 
-We'll use the `ghp-import` command when I figure out how it works.
+First, add the main openrecipes repo as a remote:
+
+	git remote add openrecipes-main git@github.com:fictivekin/openrecipes.git
+
+Next, make sure to regen the site:
+
+	python openrecipes.py build
+
+Finally, use ghp-import to take the contents of `./build`, put it in the local `gh-pages` branch, and push that to the `openrecipes-main` remote:
+
+	ghp-import -r openrecipes-main -p ./build/
+
+The site should now be viewable at <http://fictivekin.com/openrecipes/>
