@@ -14,3 +14,7 @@ This is the web site for the Open Recipes project. It uses Flask, Flask-FlatPage
 ## Adding pages
 
 Put a file in the `/pages` directory with a name like `file-name.md` extention. The page will be served as HTML from the path `/file-name/`
+
+## Deploying the site
+
+We'll use the `ghp-import` command when I figure out how it works.
