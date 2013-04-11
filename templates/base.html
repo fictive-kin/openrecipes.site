@@ -9,18 +9,40 @@
 
 	<link rel="stylesheet" href="/static/css/normalize.css" />
 	<link rel="stylesheet" href="/static/css/foundation.css" />
+	<link rel="stylesheet" href="/static/css/app.css" />
+
+  <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" type="text/css" href="/static/css/pygment_trac.css" media="screen" />
+
+  <!-- for icon fonts -->
+  <link rel="stylesheet" href="/static/fonts/general_foundicons.css">
+  <link rel="stylesheet" href="/static/fonts/social_foundicons.css">
 
 	<script src="/static/js/vendor/custom.modernizr.js"></script>
 
 </head>
 <body>
 
+<header id="header-bar">
 	<div class="row">
-		<div class="large-12 columns">
-			<h1><a href="{{ url_for("index") }}">My site</a></h1>
-			{% block content %}
-			<p>Default content to be displayed</p>
-			{% endblock content %}
+		<div class="large-12 columns large-centered">
+			<div class="row">
+				<div class="large-6 columns">
+					<h1><a href="{{ url_for("index") }}">The Open Recipes project</a></h1>
+				</div>
+				<div class="large-3 columns last">
+					<a href="https://github.com/fictivekin/openrecipes"><span class="foundicon-github"></span> View on GitHub</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</header>
+
+	<div class="row">
+		<div class="large-10 columns large-centered">
+				{% block content %}
+				<p>Default content to be displayed</p>
+				{% endblock content %}
 		</div>
 	</div>
 

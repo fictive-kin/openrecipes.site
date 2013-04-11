@@ -2,5 +2,12 @@
 
 {% block content %}
     <h1>{{ page.title }}</h1>
-    {{ page.html|safe }}
+    <hr>
+
+	<div class="row">
+		<div class="large-10 columns large-centered">
+			{{ page.html|safe }}
+		</div>
+	</div>
+
 {% endblock content %}
