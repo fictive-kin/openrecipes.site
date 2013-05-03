@@ -1,23 +1,5 @@
-import
+@import url(http://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic);
 
-
-body, h1, h2, h3, h4, h5, h6, p, li {
-	font-family: "Palatino", Georgia, Times, Serif;
-	color: #444444;
-}
-
-body {
-  background: #e7e7e7 url(../img/body-bg.png) 0 0 repeat;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
-  color: #6d6d6d;
-}
-
-
-#header-bar {
-	font-family: Palatino, Georgia, Times, Serif;
-	background-color: #444444;;
-	margin-bottom: 2em;
-}
 
 #header-bar a, #header-bar h1 {
 	font-size: 1em;
@@ -32,18 +14,6 @@ body {
 	padding:0;
 }
 
-
-#header-bar span[class*="foundicon-"] {
-	text-shadow: none;
-	color:white;
-	font-size:1.5em;
-	vertical-align: text-top;
-}
-
-ul, ol, dl {
-	margin-left: 1.5em;
-}
-
 hr {
   height: 1px;
   line-height: 1px;
@@ -51,4 +21,128 @@ hr {
   padding-bottom: 1em;
   border: none;
   background: transparent url('../img/hr.png') 50% 0 no-repeat;
+}
+
+
+body {
+    background: #fff;
+}
+
+h1,
+h2,
+h3 {
+    color: #635b53;
+    font-family: "PT Serif", Georgia, sans-serif;
+    font-weight: 700;
+    text-shadow: 0 0 transparent;
+}
+
+h1 {
+    font-size: 36px;
+}
+
+h2 {
+    font-size: 24px;
+    margin: 36px 0 12px;
+}
+
+hr {
+    background: none;
+    border-bottom: 1px solid #ddd;
+    position: relative;
+}
+
+body > .row h1:after {
+    content: "\263a";
+    color: #fc913a;
+    display: block;
+    font-size: 24px;
+    position: absolute;
+    left: -12px;
+    top: 68px;
+    z-index: 10;
+}
+
+body > .row {
+    -webkit-box-shadow: 0 2px 5px 0 #f6f6f6;
+    -moz-box-shadow: 0 2px 5px 0 #f6f6f6;
+    box-shadow: 0 2px 5px 0 #f6f6f6;
+    border-radius: 5px;
+    background: #fff;
+    padding: 24px;
+    border: 1px solid #ddd;
+}
+
+ul,
+ol {
+    margin: 24px 0 24px 24px;
+}
+
+@media screen and (min-width: 481px) {
+
+    ul,
+    ol {
+        margin: 24px 0;
+    }
+
+}
+
+li {
+    margin-bottom: 12px;
+}
+
+p,
+li {
+    color: #635b53;
+    font: normal normal 15px/24px "PT Serif", serif;
+}
+
+p {
+    margin: 0 0 12px;
+}
+
+blockquote,
+blockquote p {
+    font-style: italic;
+}
+
+#header-bar {
+    background: #FC913A;
+}
+
+#header-bar a {
+    -webkit-font-smoothing: antialiased;
+    color: #fff;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size: 14px;
+    height: 40px;
+    line-height: 40px;
+    padding: 0;
+    text-decoration: none;
+    text-shadow: 0 0 transparent;
+}
+
+#header-bar span[class*="foundicon-"] {
+    vertical-align: middle;
+    font-size:22px;
+}
+
+.row {
+    margin-bottom: 48px;
+    max-width: 640px;
+}
+
+.row .large-10 {
+    margin: 0;
+    width: 100%;
+}
+
+a {
+    color: #319dd4;
+    text-decoration: underline;
+}
+
+a:hover {
+    color: #319dd4;
+    text-decoration: none;
 }
