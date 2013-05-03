@@ -25,8 +25,4 @@ Next, make sure to regen the site:
 
 	python openrecipes.py build
 
-Finally, use ghp-import to take the contents of `./build`, put it in the local `gh-pages` branch, and push that to the `openrecipes-main` remote:
-
-	ghp-import -r openrecipes-main -p ./build/
-
-The site should now be viewable at <http://fictivekin.com/openrecipes/>
+Then we deploy in a way that is currently obscure.
