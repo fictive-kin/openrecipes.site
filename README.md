@@ -17,12 +17,8 @@ Put a file in the `/pages` directory with a name like `file-name.md` extention. 
 
 ## Deploying the site
 
-First, add the main openrecipes repo as a remote:
-
-	git remote add openrecipes-main git@github.com:fictivekin/openrecipes.git
-
-Next, make sure to regen the site:
+Make sure to regen the site:
 
 	python openrecipes.py build
 
-Then we deploy in a way that is currently obscure.
+Then we deploy with the script in `deploy.example.sh`. You'll want to copy this to `deploy.sh` and modify the `STATICSITES_REPO_PATH` variable.
