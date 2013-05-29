@@ -20,7 +20,7 @@ def index():
 
 
 @app.route('/stats/')
-def page_poop():
+def stats():
     """
     special stats page that renders a template directly
     """
