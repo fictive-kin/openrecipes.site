@@ -6,11 +6,13 @@
 {% endblock extra_head %}
 
 {% block content %}
+<h1>Database Stats</h1>
+<hr>
 <div id="charts">
-<div id="alltime" class="chart" style="height:500px"><h2>All time</h2><svg></svg></div>
-<div id="last1" class="chart" style="height:500px"><h2>Last 24 hours</h2><svg></svg></div>
-<div id="last7" class="chart" style="height:500px"><h2>Last 7 days</h2><svg></svg></div>
-<div id="last30" class="chart" style="height:500px"><h2>Last 30 days</h2><svg></svg></div>
+<div id="alltime" class="chart" style="height:500px"><h2>All time: <span class="total"></span></h2><svg></svg></div>
+<div id="last1" class="chart" style="height:500px"><h2>Last 24 hours: <span class="total"></span></h2><svg></svg></div>
+<div id="last7" class="chart" style="height:500px"><h2>Last 7 days: <span class="total"></span></h2><svg></svg></div>
+<div id="last30" class="chart" style="height:500px"><h2>Last 30 days: <span class="total"></span></h2><svg></svg></div>
 </div>
 {% endblock content %}
 
@@ -31,6 +33,8 @@ function prep_for_charts(key, vals) {
 				label: skey,
 				value: vals[skey]
 			});
+		} else { // use the TOTAL key for the total count
+			chart_data['total'] = vals[skey]
 		}
 	});
 	return [chart_data];
@@ -60,13 +64,16 @@ $(document).ready(function() {
 
 					this_chart.valueFormat(d3.format(',f'))
 
+					d3.select('#'+key+' svg')
+						.datum(val)
+						.transition().duration(1200)
+						.call(this_chart);
 
-						d3.select('#'+key+' svg')
-							.datum(val)
-							.transition().duration(1200)
-							.call(this_chart);
+					// insert the total amount
+					$('#'+key+' .total')
+						.html(d3.format(',f')(val[0].total))
 
-						return this_chart;
+					return this_chart;
 				});
 
 			});
