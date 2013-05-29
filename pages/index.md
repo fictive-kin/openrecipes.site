@@ -19,7 +19,7 @@ That's pretty much it. We're not trying to save the world. We're just trying to 
 
 ## The Database
 
-Regular snapshots of the database will be provided as JSON. The format will mirror the [schema.org Recipe format](http://schema.org/Recipe). We've [posted an example dump of data](http://openrecipes.s3.amazonaws.com/openrecipes.txt) so you can get a feel for it.
+Regular snapshots of the database are provided as JSON. The format mirrors the [schema.org Recipe format](http://schema.org/Recipe). We've [posted an example dump of data](http://openrecipes.s3.amazonaws.com/openrecipes.txt) so you can get a feel for it.
 
 ## The Story
 
