@@ -19,6 +19,14 @@ def index():
     return page('index')
 
 
+@app.route('/stats/')
+def page_poop():
+    """
+    special stats page that renders a template directly
+    """
+    return render_template('stats.html')
+
+
 @app.route('/<path:path>/')
 def page(path):
     page = pages.get_or_404(path)
