@@ -1,0 +1,78 @@
+
+{% extends "base.html" %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/nv.d3.css') }}">
+{% endblock extra_head %}
+
+{% block content %}
+<div id="charts">
+<div id="alltime" class="chart" style="height:500px"><h2>All time</h2><svg></svg></div>
+<div id="last1" class="chart" style="height:500px"><h2>Last 24 hours</h2><svg></svg></div>
+<div id="last7" class="chart" style="height:500px"><h2>Last 7 days</h2><svg></svg></div>
+<div id="last30" class="chart" style="height:500px"><h2>Last 30 days</h2><svg></svg></div>
+</div>
+{% endblock content %}
+
+{% block extra_footer %}
+<script src="{{ url_for('static', filename='js/d3.v2.js') }}" type="text/javascript" charset="utf-8"></script>
+<script src="{{ url_for('static', filename='js/nv.d3.js') }}" type="text/javascript" charset="utf-8"></script>
+<script src="{{ url_for('static', filename='js/underscore-min.js') }}" type="text/javascript" charset="utf-8"></script>
+
+<script>
+
+function prep_for_charts(key, vals) {
+	console.log(key);
+	var chart_data = { key: key, values: [] }
+	var source_keys = Object.keys(vals);
+	_.each(source_keys, function(skey) {
+		if (skey !== 'TOTAL') {
+			chart_data['values'].push({
+				label: skey,
+				value: vals[skey]
+			});
+		}
+	});
+	return [chart_data];
+}
+
+$(document).ready(function() {
+	var xhr = $.ajax({
+		url: 'http://openrecipes-stats.s3.amazonaws.com/recipeitems-stats-latest.json',
+		dataType: 'json',
+		success: function(stats) {
+
+			chart_data = {
+				'alltime': prep_for_charts('All time', stats['All time']),
+				'last1': prep_for_charts('Last 1 day(s)', stats['Last 1 day(s)']),
+				'last7': prep_for_charts('Last 7 day(s)', stats['Last 7 day(s)']),
+				'last30': prep_for_charts('Last 30 day(s)', stats['Last 30 day(s)']),
+			}
+			console.log(chart_data);
+
+			_.each(chart_data, function(val, key) {
+				nv.addGraph(function() {
+					this_chart = nv.models.pieChart()
+						.x(function(d) { console.log(d); return d.label })
+						.y(function(d) { console.log(d); return d.value })
+						.showLabels(true)
+						.showLegend(true);
+
+					this_chart.valueFormat(d3.format(',f'))
+
+
+						d3.select('#'+key+' svg')
+							.datum(val)
+							.transition().duration(1200)
+							.call(this_chart);
+
+						return this_chart;
+				});
+
+			});
+		}
+	})
+});
+
+</script>
+{% endblock extra_footer %}
