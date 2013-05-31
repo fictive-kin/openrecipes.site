@@ -23,21 +23,42 @@
 
 <script>
 
+// store the colors as we generate them so we can reuse the same color for
+// newer calls on each source
+var global_colors = {};
+
 function prep_for_charts(key, vals) {
-	console.log(key);
+	// console.log(key);
 	var chart_data = { key: key, values: [] }
 	var source_keys = Object.keys(vals);
+	chart_data['total'] = vals['TOTAL'];
 	_.each(source_keys, function(skey) {
 		if (skey !== 'TOTAL') {
+			var perc = (vals[skey]/chart_data['total']) * 100
 			chart_data['values'].push({
-				label: skey,
+				label: skey + " (" + d3.round(perc, 1) + "%)",
 				value: vals[skey]
 			});
-		} else { // use the TOTAL key for the total count
-			chart_data['total'] = vals[skey]
 		}
 	});
+
+	// sort by value
+	chart_data['values'] = _.sortBy(chart_data['values'], function(row) {
+		return -row.value; // return negative so it is in descending order
+	});
 	return [chart_data];
+}
+
+function rand(min, max) {
+	return parseInt(Math.random() * (max-min+1), 10) + min;
+}
+
+// http://stackoverflow.com/questions/5850590/random-color-generator-with-hue-saturation-and-more-controls
+function get_random_color() {
+	var h = rand(1, 360);
+	var s = rand(30, 80);
+	var l = rand(60, 90);
+	return 'hsl(' + h + ',' + s + '%,' + l + '%)';
 }
 
 $(document).ready(function() {
@@ -57,9 +78,27 @@ $(document).ready(function() {
 			_.each(chart_data, function(val, key) {
 				nv.addGraph(function() {
 					this_chart = nv.models.pieChart()
-						.x(function(d) { console.log(d); return d.label })
-						.y(function(d) { console.log(d); return d.value })
+						.x(function(d) { return d.label })
+						.y(function(d) { return d.value })
+						.color(function(slice, idx) {
+							var d;
+							if (slice.data) {
+								d = slice.data;
+							} else {
+								d = slice;
+							}
+
+							source_label = d.label.split(' ')[0];
+
+							if (!global_colors[source_label]) {
+								console.log('new color', source_label);
+								global_colors[source_label] = get_random_color();
+							}
+							var this_color = global_colors[source_label];
+							return this_color;
+						})
 						.showLabels(true)
+						.labelThreshold(.2)
 						.showLegend(true);
 
 					this_chart.valueFormat(d3.format(',f'))
